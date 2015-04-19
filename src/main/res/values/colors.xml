@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="updating_sdk_black" type="color">#000000</item>
+    <item name="updating_sdk_white" type="color">#ffffff</item>
+    <item name="updating_sdk_blue" type="color">#1daeec</item>
+
+    <color name="updating_sdk_grey0">#f9f8f8</color>
+    <color name="updating_sdk_grey1">#f4f3f3</color>
+    <color name="updating_sdk_grey2">#dfdfdf</color>
+    <color name="updating_sdk_grey3">#cdcdcd</color>
+    <color name="updating_sdk_grey4">#bab9b9</color>
+    <color name="updating_sdk_grey5">#bab9b9</color>
+    <color name="updating_sdk_grey6">#a5a4a4</color>
+    <color name="updating_sdk_grey7">#8b8989</color>
+    <color name="updating_sdk_grey8">#767474</color>
+    <color name="updating_sdk_grey9">#5b5a5a</color>
+    <color name="updating_sdk_grey10">#434242</color>
+    <color name="updating_sdk_green1">#7ff490</color>
+    <color name="updating_sdk_green2">#5ce770</color>
+
+
+</resources>
