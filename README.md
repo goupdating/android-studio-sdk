@@ -31,3 +31,8 @@ After integrating java code please ensure that your application's manifest(Andro
 <uses-permission android:name="android:permission.INTERNET">
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
+
+##Thanks to below libraries and Contributors
+
+#### [James Smith - loopj](http://loopj.com/android-async-http/)
+
