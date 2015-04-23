@@ -4,7 +4,7 @@ Updating, Upgrading and Monitoring, right away from your mobile app. It’s abou
 
 ##Setup
 
-**For Eclipse/ADT user**: please see tag [android-eclipse-sdk](https://github.com/goupdating/android-eclipse-sdk), download the source codes, check out the Updating to see how the library works.
+**For Eclipse/ADT user**: please see [android-eclipse-sdk](https://github.com/goupdating/android-eclipse-sdk), download the source codes, check out the Updating to see how the library works.
 
 ####To start with
 
