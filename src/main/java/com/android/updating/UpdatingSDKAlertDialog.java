@@ -2,12 +2,15 @@ package com.android.updating;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -32,8 +35,10 @@ public class UpdatingSDKAlertDialog extends Dialog {
     private Context mContext;
 
     private Button button_one, button_two;
-    private TextView text_updating_sdk_message,
+    private TextView text_app_name, text_updating_sdk_message,
             text_updating_sdk_developer_message;
+
+    private ImageView image_icon;
 
     private JSONObject responseObj;
 
@@ -79,6 +84,8 @@ public class UpdatingSDKAlertDialog extends Dialog {
 
         button_one = (Button) findViewById(R.id.button_one);
         button_two = (Button) findViewById(R.id.button_two);
+        image_icon = (ImageView) findViewById(R.id.image_icon);
+        text_app_name = (TextView) findViewById(R.id.text_app_name);
 
         text_updating_sdk_message = (TextView) findViewById(R.id.text_updating_sdk_message);
         text_updating_sdk_developer_message = (TextView) findViewById(R.id.text_updating_sdk_developer_message);
@@ -88,6 +95,24 @@ public class UpdatingSDKAlertDialog extends Dialog {
     private void defaultConfiguration() {
 
         // text_updating_sdk_developer_message.setVisibility(View.GONE);
+
+
+        try {
+            String appName = (String) mContext.getApplicationInfo().loadLabel(mContext.getPackageManager());
+            text_app_name.setText(appName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Drawable icon = null;
+        try {
+            icon = mContext.getPackageManager().getApplicationIcon(mContext.getPackageName());
+            image_icon.setImageDrawable(icon);
+        } catch (PackageManager.NameNotFoundException e) {
+            image_icon.setVisibility(View.GONE);
+            e.printStackTrace();
+        }
+
 
         text_updating_sdk_developer_message.setVisibility(View.GONE);
 
