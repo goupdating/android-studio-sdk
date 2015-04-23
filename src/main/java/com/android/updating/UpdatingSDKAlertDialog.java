@@ -94,9 +94,6 @@ public class UpdatingSDKAlertDialog extends Dialog {
 
     private void defaultConfiguration() {
 
-        // text_updating_sdk_developer_message.setVisibility(View.GONE);
-
-
         try {
             String appName = (String) mContext.getApplicationInfo().loadLabel(mContext.getPackageManager());
             text_app_name.setText(appName);
@@ -105,6 +102,7 @@ public class UpdatingSDKAlertDialog extends Dialog {
         }
 
         Drawable icon = null;
+
         try {
             icon = mContext.getPackageManager().getApplicationIcon(mContext.getPackageName());
             image_icon.setImageDrawable(icon);
@@ -112,7 +110,6 @@ public class UpdatingSDKAlertDialog extends Dialog {
             image_icon.setVisibility(View.GONE);
             e.printStackTrace();
         }
-
 
         text_updating_sdk_developer_message.setVisibility(View.GONE);
 
