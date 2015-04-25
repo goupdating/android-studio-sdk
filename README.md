@@ -4,7 +4,7 @@ Updating, Upgrading and Monitoring, right away from your mobile app. It’s abou
 
 ##Setup
 
-**For Eclipse/ADT user**: please see tag [android-eclipse-sdk](https://github.com/goupdating/android-eclipse-sdk), download the source codes, check out the Updating to see how the library works.
+**For Eclipse/ADT user**: please see [android-eclipse-sdk](https://github.com/goupdating/android-eclipse-sdk), download the source codes, check out the Updating to see how the library works.
 
 ####To start with
 
@@ -31,6 +31,7 @@ After integrating java code please ensure that your application's manifest(Andro
 <uses-permission android:name="android:permission.INTERNET">
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
+######Once every thing is done, download Updating App from [Google Play](http://play.google.com/store/apps/details?id=com.updating) or [Apple Store](http://apple.com) to monitor app statistics.   
 
 ##Thanks to below libraries and Contributors
 
