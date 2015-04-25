@@ -1,14 +1,18 @@
 package com.android.updating;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -21,8 +25,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
+
+import static android.graphics.BitmapFactory.decodeResource;
 
 /**
  * Created by sayagodshala on 3/3/2015.
@@ -116,6 +123,13 @@ public class Updating {
                     if (!responseObj.isNull("error")) {
                         if (!responseObj.getBoolean("error")) {
                             if (responseObj.getBoolean("updateAvailable")) {
+
+                                try {
+                                    generateNotification();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
                                 showUpdateDialog(responseObj);
                             } else {
                                 if (responseObj.has("developerMessage")) {
@@ -202,7 +216,9 @@ public class Updating {
                         countryCode = locale.getCountry();
                     }
                 }
+
                 device.put("country", countryCode);
+
             } else {
                 device.put("operator", "");
                 device.put("country", locale.getCountry());
@@ -324,12 +340,66 @@ public class Updating {
                 new UpdatingSDKAlertDialog.UpdatingSDKAlertDialogListener() {
                     @Override
                     public void onButton1Action() {
+
                     }
 
                     @Override
                     public void onButton2Action() {
+
                     }
                 });
         updatingAlertDialog.show();
     }
+
+    private void generateNotification() {
+
+        String packageName = mContext.getApplicationContext().getPackageName();
+        Intent launchIntent = mContext.getApplicationContext().getPackageManager().getLaunchIntentForPackage(packageName);
+        String className = launchIntent.getComponent().getClassName();
+
+        Class<?> c = null;
+        if (className != null) {
+            try {
+                c = Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                Log.i("Tag", "Throw exception when try to get the main class.");
+                e.printStackTrace();
+            }
+        }
+
+        ApplicationInfo info = null;
+        try {
+            info = mContext.getApplicationContext().getPackageManager().getApplicationInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        int icon = info.icon;
+
+        String message = "App update is available, click to update!";
+        String appName = (String) mContext.getApplicationInfo().loadLabel(mContext.getPackageManager());
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(
+                mContext)
+                .setTicker("App update is available for " + appName)
+                .setContentTitle(appName)
+                .setContentText(message)
+                .setWhen(Calendar.getInstance().getTimeInMillis())
+                .setSmallIcon(icon)
+                .setLargeIcon(decodeResource(mContext.getResources(),
+                        icon))
+                .setAutoCancel(true)
+                .setStyle(
+                        new NotificationCompat.BigTextStyle().bigText(message));
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + packageName));
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, 0);
+        notificationBuilder.setContentIntent(pendingIntent);
+        NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(1111, notificationBuilder.build());
+    }
+
+
 }
