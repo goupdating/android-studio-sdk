@@ -100,6 +100,7 @@ public class Updating {
             params.put("sdk", deviceInfo().getString("sdk"));
             params.put("os", deviceInfo().getString("os"));
             params.put("release", deviceInfo().getString("release"));
+            params.put("deviceType", "android");
             invokeUpdateService(params);
         } catch (Exception e) {
             e.printStackTrace();
