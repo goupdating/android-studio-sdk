@@ -125,6 +125,18 @@ public class Updating {
                         if (!responseObj.getBoolean("error")) {
                             if (responseObj.getBoolean("updateAvailable")) {
 
+//                                if (responseObj.has("showNotification")) {
+//                                    if (responseObj.getBoolean("showNotification")) {
+//                                        try {
+//                                            generateNotification();
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                    }
+//                                } else {
+//                                    showUpdateDialog(responseObj);
+//                                }
+
                                 try {
                                     generateNotification();
                                 } catch (Exception e) {
@@ -132,6 +144,8 @@ public class Updating {
                                 }
 
                                 showUpdateDialog(responseObj);
+
+
                             } else {
                                 if (responseObj.has("developerMessage")) {
                                     if (!responseObj.getString("developerMessage").equalsIgnoreCase("")) {
